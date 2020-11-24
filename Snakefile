@@ -125,6 +125,7 @@ rule index_genome:
         """
 
 rule align_to_genome:
+
     shell("bowtie2 --very-sensitive-local -x " + indexBase + " -U {input.fastq} \
     > {output} 2> {log}")
     
