@@ -125,9 +125,10 @@ rule index_genome:
         """
 
 rule align_to_genome:
-    """
-    Align a fastq file to a genome index using Bowtie 2.
-    """
+    
+    shell("bowtie2 --very-sensitive-local -x " + indexBase + " -U {input.fastq} \
+    > {output} 2> {log}")
+    
     input:
         fastq = "data/raw_internal/{sra_id}.fastq.gz",
         index = expand("intermediate/{genome_id}.{n}.bt2", genome_id = config["genome_id"], n = ["1","2","3","4"]),
